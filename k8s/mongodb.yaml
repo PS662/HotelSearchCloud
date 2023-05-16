@@ -1,0 +1,32 @@
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: mongodb
+  namespace: mongodb
+spec:
+  members: 1 # Probably need to use ReplicaSet instead of standalone
+  type: ReplicaSet
+  version: "4.4.0"
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+  - name: admin
+    db: hotel_db
+    passwordSecretRef:
+      name: hotel-password
+    scramCredentialsSecretName: admin-scram
+    roles:
+      - name: readWrite
+        db: hotel_db
+  statefulSet:
+    spec:
+      volumeClaimTemplates:
+      - metadata:
+          name: data
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 1Gi
+          storageClassName: mongodb-storage

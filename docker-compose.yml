@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  nlp_service:
+    build: ./nlp_service
+    image: prateek662/nlp_service_app
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./nlp_service:/app
+      - /app/node_modules
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3001/health-check"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      app-network:
+        ipv4_address: 172.16.238.10
+
+  search_service:
+    build: ./search_service
+    image: prateek662/search_service_app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./search_service:/app
+      - /app/node_modules
+    environment:
+      - CONFIG_NAME=docker
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3000/health-check"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      app-network:
+        ipv4_address: 172.16.238.11
+
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
+
