@@ -11,13 +11,11 @@ async function testMongoDBDirect() {
     const db = client.db('hotel_db');
     const collection = db.collection('test');
 
-    // Insert a document
     const doc = { name: "Test Document", message: "This is a test document from Node.js." };
     const result = await collection.insertOne(doc);
 
     console.log("Inserted document with _id: " + result.insertedId);
 
-    // Find one document
     const myDoc = await collection.findOne();
     console.log("Found one document: \n", myDoc);
 

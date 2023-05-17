@@ -21,7 +21,7 @@ services:
 
   search_service:
     build: ./search_service
-    image: prateek662/search_service_app
+    image: prateek662/search_service_app:latest
     ports:
       - "3000:3000"
     volumes:

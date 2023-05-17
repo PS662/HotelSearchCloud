@@ -21,3 +21,18 @@ async function testSearchEndpoint() {
 }
 
 testSearchEndpoint();
+
+async function populateDatabase() {
+  try {
+    const response = await axios.get('http://localhost:3000/populate');
+    console.log("Response Status:", response.status);
+    console.log("Response Data:", response.data);
+  } catch (err) {
+    console.error('Error while populating database: ', err.message);
+  }
+}
+
+// Check if the '--populate' flag was passed
+if (process.argv.includes('--populate')) {
+  populateDatabase();
+}
