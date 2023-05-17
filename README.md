@@ -46,6 +46,7 @@ https://github.com/mongodb/mongodb-kubernetes-operator/blob/master/docs/external
 kubectl apply -f .\k8s\mongodb-pv.yaml --namespace mongodb
 kubectl apply -f .\k8s\mongodb-pvc.yaml --namespace mongodb
 kubectl apply -f .\k8s\mongodb-storage.yaml --namespace mongodb
+kubectl apply -f .\k8s\mongodb-sv.yaml --namespace mongodb
 kubectl apply -f .\k8s\mongodb.yaml --namespace mongodb
 ```
 
@@ -57,7 +58,8 @@ kubectl delete service nlp-service --namespace mongodb
 kubectl delete deployment search-service --namespace mongodb
 kubectl delete service search-service --namespace mongodb
 kubectl delete mongodbcommunity mongodb --namespace mongodb
-kubectl delete storageclass mongodb-storage
+kubectl delete service mongodb-svc --namespace mongodb
+kubectl delete storageclass mongodb-storage --namespace mongodb
 kubectl delete namespaces mongodb
 ```
 

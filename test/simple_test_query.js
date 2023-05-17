@@ -8,7 +8,7 @@ async function testSearchEndpoint() {
   ];
 
   try {
-    const response = await axios.post("http://localhost:3000/search", {
+    const response = await axios.post("http://localhost:30000/search", {
       userQuery: userQuery,
       hotelAnnotations: hotelAnnotations,
     });

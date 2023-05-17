@@ -1,8 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
 
-const mongodbUri = "mongodb://admin:hotel_password@mongodb.mongodb.svc.cluster.local:27017/hotel_db?authSource=admin";
+const mongodbUri = "mongodb://admin:hotel_password@localhost:32000/hotel_db?authSource=admin&directConnection=true";
 
-async function testMongoDB() {
+async function testMongoDBDirect() {
   const client = new MongoClient(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true });
 
   try {
@@ -28,4 +28,4 @@ async function testMongoDB() {
   }
 }
 
-testMongoDB();
+testMongoDBDirect();

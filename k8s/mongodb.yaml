@@ -3,6 +3,8 @@ kind: MongoDBCommunity
 metadata:
   name: mongodb
   namespace: mongodb
+  labels:
+    app: mongodb
 spec:
   members: 1 # Probably need to use ReplicaSet instead of standalone
   type: ReplicaSet
@@ -12,7 +14,7 @@ spec:
       modes: ["SCRAM"]
   users:
   - name: admin
-    db: hotel_db
+    db: admin
     passwordSecretRef:
       name: hotel-password
     scramCredentialsSecretName: admin-scram
