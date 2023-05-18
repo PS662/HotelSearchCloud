@@ -15,8 +15,8 @@ A simple hotel search application,
 - Uses Kubernetes on top of these microservices to create a cluster and orchestrate.
 - Uses MongoDB for backend.
 
-#### The larger purpose of this project is to have a reusable code to quickly set up semantic search style projects using docker (compose), kubernetes and mongodb. 
-#### You can switch the backend NLP pipeline with more powerful models.
+<br> The larger purpose of this project is to have a reusable code to quickly set up semantic search style projects using docker (compose), kubernetes and mongodb. 
+<br> You can switch the backend NLP pipeline with more powerful models.
 
 ## Getting Started <a name = "getting_started"></a>
 
