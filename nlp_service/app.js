@@ -6,11 +6,11 @@ const use = require('@tensorflow-models/universal-sentence-encoder');
 const app = express();
 app.use(bodyParser.json());
 
-//let model = null;
+let model = null;
 async function loadModel() {
-  //if (!model) {
+  if (!model) {
     model = await use.load();
-  //}
+  }
   return model;
 }
 

@@ -27,7 +27,7 @@ async function processQuery(userQuery, hotelAnnotations) {
   const userEmbeddings = embeddings[0];
   const hotelEmbeddings = embeddings.slice(1);
   const similarities = cosineSimilarity(tf.tensor2d([userEmbeddings]), tf.tensor2d(hotelEmbeddings));
-  return similarities[0];
+  return similarities;
 }
 
 module.exports = { processQuery };
