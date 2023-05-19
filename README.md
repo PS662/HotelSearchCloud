@@ -9,7 +9,7 @@
 ## About <a name = "about"></a>
 
 A simple hotel search application, 
-- Uses two microservices to perform basic semantic search.
+- Uses two microservices(nlp-service and search-service) to perform basic semantic search.
 - Uses Docker to containerize
 - Uses docker-compose to run as a service on a single host.
 - Uses Kubernetes on top of these microservices to create a cluster and orchestrate.
