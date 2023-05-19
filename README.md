@@ -125,7 +125,7 @@ kubectl delete namespaces mongodb
 You can test the application by using test/simple_test_query.js (you need node installed for this):
 
 ```
-node simple_test_query.js --all
+node simple_test_query.js --all //--all runs all the endpoints in async order with default params
 ```
 
 If you have not set up port forwarding and want a custom host then use:
@@ -137,13 +137,32 @@ node simple_test_query.js --all --host "http://localhost:30000" <or your custom 
 or you can use this tool to test in a more customized way:
 
 ```
-node simple_test_query.js --userQuery="I want a hotel with free WiFi" --hotelId=1 --newAnnotation="This hotel has free WiFi" --numAnnotations=10 --deleteAll=true --all
+node simple_test_query.js --userQuery="I want a hotel with free WiFi" --hotelId=1 --newAnnotation="This hotel has free WiFi" --numAnnotations=10 --deleteAll=false --all
 ```
 
 or if you want you can test only a particular endpoint: 
 
 ```
 node simple_test_query.js insert --hotelId=1 --newAnnotation="This hotel has city view"
+```
+
+The service has following endpoints (all can be tested via this tool):
+
+```
+    / : The base or root endpoint, serves a basic static web page.
+    /health-check : An endpoint that checks if the service is healthy and running properly.
+    /populate : An endpoint that populates the database with a specified number of hotel annotations, including their associated embeddings.
+    /insert : An endpoint that inserts new hotel annotation(s) and hotel-id into the database.
+    /update : An endpoint that updates hotel annotation(s) in the database by hotel-id.
+    /delete : An endpoint that deletes a specified hotel record or all hotels from the database.
+    /compare : An endpoint that compares passed user query and passed annotations. This is just for sanity check to see if we can get raw similarities from service.
+    
+    // In following search endpoints, if there are multiple annoations then max similarity is considered, also returns mean similairy score for more insights.
+    /search : An endpoint that searches the database for hotels annoations matching a user query, returning results based on text similarity. Loads all the annotations in memory and then computes the similarity (not recommended).
+    /searchEmbeddings : An optimized search endpoint for large scale search. queries all embeddings stored and ranks based on thier max similarity score.
+    
+    //Helper to update/recompute all embeddings based on the annotations in the db. Can be helpful if the embeddings are corrupted for whatever reason.
+    /enrol : An endpoint that enrols a new user or registers a new client, depending on the service's purpose.
 ```
 
 ### Some Tools

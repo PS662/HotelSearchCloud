@@ -15,7 +15,7 @@ function cosineSimilarity(a, b) {
   return similarity.arraySync();
 }
 
-async function processQuery(userQuery, hotelAnnotations) {
+async function compareQueries(userQuery, hotelAnnotations) {
   const nlpServiceUrl = `http://${config.nlpService.ipAddress}:${config.nlpService.port}/get_embeddings`;
   const embeddingsRes = await fetch(nlpServiceUrl, {
     method: 'POST',
@@ -30,4 +30,17 @@ async function processQuery(userQuery, hotelAnnotations) {
   return similarities;
 }
 
-module.exports = { processQuery };
+async function processBatchQuery(texts, options = {}) {
+  const { timeout = 100000 } = options;
+  const nlpServiceUrl = `http://${config.nlpService.ipAddress}:${config.nlpService.port}/get_embeddings`;
+  const embeddingsRes = await fetch(nlpServiceUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ texts: texts }),
+    timeout 
+  });
+  const embeddingsData = await embeddingsRes.json();
+  return embeddingsData.embeddings;
+}
+
+module.exports = {compareQueries, processBatchQuery, cosineSimilarity};

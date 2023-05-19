@@ -61,6 +61,20 @@ async function testSearchEndpoint() {
   }
 }
 
+async function testSearchEmbeddingsEndpoint() {
+  console.log("Search");
+  try {
+    const response = await axios.post(`${BASE_URL}/searchEmbeddings`, {
+      userQuery: userQuery,
+    });
+
+    console.log("Status:", response.status);
+    console.log("Search Results:", response.data);
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+}
+
 async function testDeleteEndpoint() {
   console.log("Delete");
   try {
@@ -114,6 +128,10 @@ if (argv._.includes('insert') || argv.all) {
 
 if (argv._.includes('search') || argv.all) {
   testSearchEndpoint();
+}
+
+if (argv._.includes('searchEmbeddings') || argv.all) {
+  testSearchEmbeddingsEndpoint();
 }
 
 if (argv._.includes('update') || argv.all) {
