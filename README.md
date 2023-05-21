@@ -161,8 +161,7 @@ The service has following endpoints (all can be tested via this tool):
     /search : An endpoint that searches the database for hotels annoations matching a user query, returning results based on text similarity. Loads all the annotations in memory and then computes the similarity (not recommended).
     /searchEmbeddings : An optimized search endpoint for large scale search. queries all embeddings stored and ranks based on thier max similarity score.
     
-    //Helper to update/recompute all embeddings based on the annotations in the db. Can be helpful if the embeddings are corrupted for whatever reason.
-    /enrol : An endpoint that enrols a new user or registers a new client, depending on the service's purpose.
+    /enrol : Helper to update/recompute all embeddings based on the annotations in the db. Can be helpful if the embeddings are corrupted for whatever reason.
 ```
 
 ### Some Tools
