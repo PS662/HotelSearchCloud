@@ -14,10 +14,17 @@ spec:
     spec:
       containers:
       - name: search-service
-        image: prateek662/search_service_app:latest
+        image: gcr.io/hotel-search-cloud/search_service_app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
         env:
         - name: CONFIG_NAME
           value: "kube"
@@ -26,10 +33,3 @@ spec:
             secretKeyRef:
               name: hotel-password
               key: password
-        volumeMounts:
-        - name: mongodb-data
-          mountPath: /data/db
-      volumes:
-      - name: mongodb-data
-        persistentVolumeClaim:
-          claimName: mongodb

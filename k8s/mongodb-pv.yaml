@@ -4,11 +4,11 @@ metadata:
   name: mongo-pv
 spec:
   capacity:
-    storage: 1Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteMany
   local:
-    path: "C:\\Users\\singh\\Documents\\MastersAppliedAIDeakin\\SIT737_Cloud_Native_Application_Development\\Assignments\\HotelSearchCloud\\PersistentVolume\\"
+    path: "<SOME PATH>"
   nodeAffinity:
     required:
       nodeSelectorTerms:

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: mongodb
 spec:
-  members: 1 # Probably need to use ReplicaSet instead of standalone
+  members: 1
   type: ReplicaSet
   version: "4.4.0"
   security:
@@ -25,10 +25,16 @@ spec:
     spec:
       volumeClaimTemplates:
       - metadata:
-          name: data
+          name: data-volume
         spec:
           accessModes: [ "ReadWriteOnce" ]
           resources:
             requests:
               storage: 1Gi
-          storageClassName: mongodb-storage
+      - metadata:
+          name: logs-volume
+        spec:
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 1Gi

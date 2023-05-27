@@ -2,8 +2,8 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: mongodb-storage
-provisioner: docker.io/hostpath
-volumeBindingMode: Immediate
-reclaimPolicy: Delete
+provisioner: kubernetes.io/gce-pd
+#volumeBindingMode: Immediate
+#reclaimPolicy: Delete
 parameters:
-  type: Directory
+  type: pd-ssd

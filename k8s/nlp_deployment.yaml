@@ -14,20 +14,20 @@ spec:
     spec:
       containers:
       - name: nlp-service
-        image: prateek662/nlp_service_app:latest
+        image: gcr.io/hotel-search-cloud/nlp_service_app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3001
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
         env:
         - name: MONGODB_URI
           valueFrom:
             secretKeyRef:
               name: hotel-password
               key: password
-        volumeMounts:
-        - name: mongodb-data
-          mountPath: /data/db
-      volumes:
-      - name: mongodb-data
-        persistentVolumeClaim:
-          claimName: mongodb

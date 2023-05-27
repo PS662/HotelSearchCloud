@@ -42,7 +42,7 @@ https://github.com/mongodb/mongodb-kubernetes-operator/blob/master/docs/install-
 git clone https://github.com/mongodb/mongodb-kubernetes-operator.git
 cd mongodb-kubernetes-operator
 kubectl create namespace mongodb
-kubectl apply -f config/crd/bases/mongodbcommunity.mongodb.com_mongodbcommunity.yaml --namespace mongodb
+kubectl apply -f config/crd/bases/mongodbcommunity.mongodb.com_mongodbcommunity.yaml
 kubectl get crd/mongodbcommunity.mongodbcommunity.mongodb.com --namespace mongodb #Verify whether created
 kubectl apply -k config/rbac/ --namespace mongodb
 kubectl create -f config/manager/manager.yaml --namespace mongodb
@@ -62,9 +62,12 @@ https://github.com/mongodb/mongodb-kubernetes-operator/blob/master/docs/external
 To start the mongodb service, run the following commands:
 
 ```
-kubectl apply -f k8s/mongodb-pv.yaml --namespace mongodb
-kubectl apply -f k8s/mongodb-pvc.yaml --namespace mongodb
-kubectl apply -f k8s/mongodb-storage.yaml --namespace mongodb
+#kubectl apply -f k8s/mongodb-pv.yaml --namespace mongodb #NOT NEEDED WHEN DEPLOYING ON GCP
+#kubectl apply -f k8s/mongodb-storage.yaml --namespace mongodb #NOT NEEDED WHEN DEPLOYING ON GCP
+#kubectl apply -f k8s/mongodb-pvc.yaml --namespace mongodb #NOT NEEDED WHEN DEPLOYING ON GCP
+#kubectl apply -f k8s/mongodb-data-pvc.yaml --namespace mongodb #NOT NEEDED WHEN DEPLOYING ON GCP
+#kubectl apply -f k8s/mongodb-logs-pvc.yaml --namespace mongodb #NOT NEEDED WHEN DEPLOYING ON GCP
+
 kubectl apply -f k8s/mongodb-sv.yaml --namespace mongodb
 kubectl apply -f k8s/mongodb.yaml --namespace mongodb
 ```
@@ -76,6 +79,8 @@ kubectl apply -f k8s/nlp_service.yaml --namespace mongodb
 kubectl apply -f k8s/nlp_deployment.yaml --namespace mongodb
 kubectl apply -f k8s/search_deployment.yaml --namespace mongodb
 kubectl apply -f k8s/search_service.yaml --namespace mongodb
+kubectl apply -f k8s/search_hpa.yaml --namespace mongodb
+kubectl apply -f k8s/nlp_hpa.yaml --namespace mongodb
 ```
 
 
@@ -106,6 +111,7 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 Navigate to http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/ and use the generated token to access the dashboard.
 
+
 ### Cleanup
 
 To teardown everything and delete the resources run the following commands:
@@ -118,6 +124,10 @@ kubectl delete service search-service --namespace mongodb
 kubectl delete mongodbcommunity mongodb --namespace mongodb
 kubectl delete service mongodb-svc --namespace mongodb
 kubectl delete storageclass mongodb-storage --namespace mongodb
+kubectl delete pvc mongodb-pvc --namespace mongodb
+kubectl delete pvc mongodb-logs-pvc --namespace mongodb
+kubectl delete pvc mongodb-data-pvc --namespace mongodb
+kubectl delete pv mongodb-pv --namespace mongodb
 kubectl delete namespaces mongodb
 ```
 ## Usage <a name = "usage"></a>
