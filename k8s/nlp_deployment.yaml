@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: nlp-service
 spec:
-  replicas: 1
+  replicas: 3
+  minReadySeconds: 30
   selector:
     matchLabels:
       app: nlp-service
