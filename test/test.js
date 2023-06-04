@@ -8,5 +8,6 @@ describe('GET /health-check', () => {
     const response = await request(app)
       .get('/health-check')
       .expect(200);
+      console.log('Health check completed'); 
   });
 });
