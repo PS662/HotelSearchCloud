@@ -6,8 +6,7 @@ steps:
   # Building and pushing the NLP service image
   - name: 'gcr.io/cloud-builders/docker'
     id: Build and push NLP service
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/nlp_service_app:$COMMIT_SHA', '.']
-    dir: 'HotelSearchCloud/nlp_service'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/nlp_service_app:$COMMIT_SHA', './nlp_service']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/nlp_service_app:$COMMIT_SHA']
@@ -15,8 +14,7 @@ steps:
   # Building and pushing the Search service image
   - name: 'gcr.io/cloud-builders/docker'
     id: Build and push Search service
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/search_service_app:$COMMIT_SHA', '.']
-    dir: 'HotelSearchCloud/search_service'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/search_service_app:$COMMIT_SHA', './search_service']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/search_service_app:$COMMIT_SHA']
