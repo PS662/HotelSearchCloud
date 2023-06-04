@@ -1,0 +1,31 @@
+steps:
+# Building the Docker image for NLP Service
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/nlp_service_app', './nlp_service']
+  
+# Push the Docker image for NLP Service to Google Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/nlp_service_app']
+
+# Building the Docker image for Search Service
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/search_service_app', './search_service']
+
+# Push the Docker image for Search Service to Google Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/search_service_app']
+
+# Deploy to Kubernetes
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', './k8s']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=${_CLOUDSDK_COMPUTE_ZONE}'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLOUDSDK_CONTAINER_CLUSTER}'
+
+images:
+- gcr.io/$PROJECT_ID/nlp_service_app
+- gcr.io/$PROJECT_ID/search_service_app
+
+substitutions:
+  _CLOUDSDK_COMPUTE_ZONE: us-west1
+  _CLOUDSDK_CONTAINER_CLUSTER: hotel-search-cluster-1
