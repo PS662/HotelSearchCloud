@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
         <title>Hotel Search</title>
       </head>
       <body>
-        <p>This is a hotel search service, served via Express.</p>
+        <p>This is a hotel search service, served via Express Server.</p>
       </body>
     </html>
   `);

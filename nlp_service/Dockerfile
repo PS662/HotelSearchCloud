@@ -7,8 +7,8 @@ RUN apt-get update \
     && curl -sL https://deb.nodesource.com/setup_19.x | bash - \
     && apt-get install -y nodejs
 
-COPY *.js .
-COPY package.json .
+COPY *.js ./
+COPY package.json ./
 
 RUN npm install
 
