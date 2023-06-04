@@ -1,6 +1,6 @@
 substitutions:
-  _CLOUDSDK_COMPUTE_ZONE: us-west1
-  _CLOUDSDK_CONTAINER_CLUSTER: hotel-search-cluster-1
+  _COMPUTE_ZONE: us-west1
+  _CONTAINER_CLUSTER: hotel-search-cluster-1
 
 steps:
   # Building and pushing the NLP service image
