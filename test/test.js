@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../nlp_service/app');
 const { expect } = require('chai');
+const express = require('express');
 
 
 describe('GET /health-check', () => {
