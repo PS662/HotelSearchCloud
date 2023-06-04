@@ -6,16 +6,25 @@ steps:
   # Running tests before building image as it can be faster to test.
   # Also, the unit tests should not be part of the delpoyments, as the image size increases 
   # and also they do not serve any purpose in deployed image.
-  - name: 'node'
-    entrypoint: npm
+  - name: 'gcr.io/cloud-builders/npm'
+    id: Install test dependencies
     args: ['install']
-    dir: './test/'
-
-  - name: 'node'
-    entrypoint: npm
+    dir: 'HotelSearchCloud/test/'
+  
+  - name: 'gcr.io/cloud-builders/npm'
+    id: Install NLP service dependencies
+    args: ['install']
+    dir: 'HotelSearchCloud/nlp_service/'
+  
+  - name: 'gcr.io/cloud-builders/npm'
+    id: Install Search service dependencies
+    args: ['install']
+    dir: 'HotelSearchCloud/search_service/'
+  
+  - name: 'gcr.io/cloud-builders/npm'
+    id: Run tests
     args: ['test']
-    dir: './test/'
-
+    dir: 'HotelSearchCloud/test/'
   # Building and pushing the NLP service image
   - name: 'gcr.io/cloud-builders/docker'
     id: Build and push NLP service
