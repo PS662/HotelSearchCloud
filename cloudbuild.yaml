@@ -7,7 +7,12 @@ steps:
   # Also, the unit tests should not be part of the delpoyments, as the image size increases 
   # and also they do not serve any purpose in deployed image.
   - name: 'gcr.io/cloud-builders/npm'
-    args: ['install', 'test']
+    id: Install dependencies and run tests
+    args: ['install']
+    dir: './test/'
+
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['test']
     dir: './test/'
 
   # Building and pushing the NLP service image
