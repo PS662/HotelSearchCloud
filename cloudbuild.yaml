@@ -7,13 +7,11 @@ steps:
   # Also, the unit tests should not be part of the delpoyments, as the image size increases 
   # and also they do not serve any purpose in deployed image.
   - name: 'node'
-    id: Install dependencies and run tests
     entrypoint: npm
     args: ['install']
     dir: './test/'
 
   - name: 'node'
-    id: Install dependencies and run tests
     entrypoint: npm
     args: ['test']
     dir: './test/'
