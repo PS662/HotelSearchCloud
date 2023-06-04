@@ -26,6 +26,26 @@ steps:
     args: ['test']
     dir: './test/'
 
+  - name: 'gcr.io/cloud-builders/npm'
+    id: Audit nlp dependencies
+    args: ['audit']
+    dir: './nlp_service/'
+
+  - name: 'gcr.io/cloud-builders/npm'
+    id: Lint code for NLP service
+    args: ['run', 'lint']
+    dir: './nlp_service/'
+ 
+  - name: 'gcr.io/cloud-builders/npm'
+    id: Audit search dependencies
+    args: ['audit']
+    dir: './search_service/'
+
+  - name: 'gcr.io/cloud-builders/npm'
+    id: Lint code for Search service
+    args: ['run', 'lint']
+    dir: './search_service/'
+
   # Building and pushing the NLP service image
   - name: 'gcr.io/cloud-builders/docker'
     id: Build and push NLP service
