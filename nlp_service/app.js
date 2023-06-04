@@ -36,3 +36,5 @@ app.post('/get_embeddings', computeEmbeddings);
 app.listen(3001, () => {
   console.log('NLP microservice listening on port 3001');
 });
+
+module.exports = app;
