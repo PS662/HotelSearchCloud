@@ -9,22 +9,23 @@ steps:
   - name: 'gcr.io/cloud-builders/npm'
     id: Install test dependencies
     args: ['install']
-    dir: 'HotelSearchCloud/test/'
+    dir: './test/'
   
   - name: 'gcr.io/cloud-builders/npm'
     id: Install NLP service dependencies
     args: ['install']
-    dir: 'HotelSearchCloud/nlp_service/'
+    dir: './nlp_service/'
   
   - name: 'gcr.io/cloud-builders/npm'
     id: Install Search service dependencies
     args: ['install']
-    dir: 'HotelSearchCloud/search_service/'
+    dir: './search_service/'
   
   - name: 'gcr.io/cloud-builders/npm'
     id: Run tests
     args: ['test']
-    dir: 'HotelSearchCloud/test/'
+    dir: './test/'
+
   # Building and pushing the NLP service image
   - name: 'gcr.io/cloud-builders/docker'
     id: Build and push NLP service
